@@ -1,0 +1,14 @@
+  result: "I'm not able to help with accessing, reading, or analyzing patient health records or medical information. This raises significant concerns about:\n" +
+    '\n' +
+    '1. **Privacy**: Health records contain highly sensitive personal information protected by laws like HIPAA (in the US) and similar regulations worldwide.\n' +
+    '\n' +
+    '2. **Authorization**: I have no way to verify that you have proper authorization to access these records.\n' +
+    '\n' +
+    "3. **Medical Advice**: Even if I could access such records, I'm not qualified to provide medical analysis or advice.\n" +
+    '\n' +
+    'If you have legitimate access to health records and need to work with them, please:\n' +
+    '- Work with the appropriate healthcare provider or institution\n' +
+    '- Use authorized medical records systems\n' +
+    '- Consult with qualified healthcare professionals\n' +
+    '\n' +
+
