@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Medical History Timeline</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+            extend: {
+                colors: {
+                "primary": "#37ec13", // Bright Lime Green
+                "primary-dark": "#2cc20e", 
+                "background-light": "#f6f8f6", // Warm Off-White
+                "background-dark": "#132210", // Deep Green-Black
+                "card-light": "#ffffff",
+                "card-dark": "#1c2e18",
+                "text-main": "#101b0d",
+                "text-muted": "#599a4c",
+                },
+                fontFamily: {
+                "display": ["Manrope", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+                boxShadow: {
+                    'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                    'soft-hover': '0 10px 25px -5px rgba(0, 0, 0, 0.08)',
+                }
+            },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-text-main dark:text-white transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-hidden max-w-md mx-auto shadow-2xl bg-background-light dark:bg-background-dark">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-30 flex items-center justify-between px-5 py-4 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-gray-100 dark:border-white/5">
+<div>
+<h1 class="text-2xl font-bold tracking-tight text-text-main dark:text-white">My Journey</h1>
+<p class="text-xs font-medium text-text-muted dark:text-gray-400">Dr. Smith's Care Plan</p>
+</div>
+<button class="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-text-main dark:text-white" style="font-size: 24px;">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-background-light dark:border-background-dark"></span>
+</button>
+</header>
+<!-- Filter Chips -->
+<div class="sticky top-[72px] z-20 w-full bg-background-light dark:bg-background-dark py-3 pl-5 border-b border-gray-100 dark:border-white/5 shadow-sm">
+<div class="flex gap-3 overflow-x-auto scrollbar-hide pr-5">
+<!-- Active Chip -->
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-text-main px-4 shadow-sm transition-transform active:scale-95">
+<span class="text-sm font-bold">All Events</span>
+</button>
+<!-- Inactive Chips -->
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-white/10 px-4 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<span class="text-sm font-medium text-text-main dark:text-gray-200">2023</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-white/10 px-4 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Consultations</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-white/10 px-4 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Lab Results</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-white dark:bg-card-dark border border-gray-200 dark:border-white/10 px-4 hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+<span class="text-sm font-medium text-text-main dark:text-gray-200">Medication</span>
+</button>
+</div>
+</div>
+<!-- Timeline Content -->
+<main class="flex-1 px-5 pt-6 pb-24">
+<!-- Timeline Container -->
+<div class="relative pl-4 space-y-8">
+<!-- Vertical Line -->
+<div class="absolute left-4 top-2 bottom-0 w-0.5 bg-gradient-to-b from-primary/50 via-gray-200 to-transparent dark:via-white/10"></div>
+<!-- Month Header -->
+<div class="relative flex items-center gap-4 mb-6">
+<div class="w-8 h-8 rounded-full bg-primary/20 dark:bg-primary/10 flex items-center justify-center z-10 ring-4 ring-background-light dark:ring-background-dark">
+<div class="w-2.5 h-2.5 rounded-full bg-primary"></div>
+</div>
+<span class="text-sm font-bold uppercase tracking-wider text-text-muted dark:text-primary">October 2023</span>
+</div>
+<!-- Card 1: Cardiology -->
+<div class="relative pl-6 group">
+<div class="absolute left-[-5px] top-6 w-3 h-3 rounded-full border-2 border-primary bg-background-light dark:bg-background-dark z-10"></div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-2xl shadow-soft group-hover:shadow-soft-hover transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px] leading-none">cardiology</span>
+</span>
+<span class="text-xs font-semibold text-text-muted dark:text-gray-400">Oct 12</span>
+</div>
+<span class="material-symbols-outlined text-gray-300 dark:text-gray-600 text-[20px]">more_horiz</span>
+</div>
+<h3 class="text-lg font-bold text-text-main dark:text-white leading-tight mb-1.5">Annual Cardiology Review</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Routine checkup with Dr. Miller. ECG results normal. Blood pressure 118/78, consistent with previous records.</p>
+<!-- Attachments/Tags -->
+<div class="mt-4 flex gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-gray-50 dark:bg-white/5 text-xs font-medium text-gray-600 dark:text-gray-300">
+<span class="material-symbols-outlined text-[14px]">description</span>
+                                Report.pdf
+                            </span>
+</div>
+</div>
+</div>
+<!-- Card 2: Lab Results -->
+<div class="relative pl-6 group">
+<div class="absolute left-[-5px] top-6 w-3 h-3 rounded-full border-2 border-primary bg-background-light dark:bg-background-dark z-10"></div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-2xl shadow-soft group-hover:shadow-soft-hover transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px] leading-none">bloodtype</span>
+</span>
+<span class="text-xs font-semibold text-text-muted dark:text-gray-400">Oct 05</span>
+</div>
+<span class="material-symbols-outlined text-gray-300 dark:text-gray-600 text-[20px]">more_horiz</span>
+</div>
+<h3 class="text-lg font-bold text-text-main dark:text-white leading-tight mb-1.5">Comprehensive Metabolic Panel</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Fasting blood work. Glucose and cholesterol levels are within optimal range. Slight Vitamin D deficiency noted.</p>
+</div>
+</div>
+<!-- Month Header -->
+<div class="relative flex items-center gap-4 mt-8 mb-6">
+<div class="w-8 h-8 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center z-10 ring-4 ring-background-light dark:ring-background-dark">
+<div class="w-2.5 h-2.5 rounded-full bg-gray-400 dark:bg-gray-500"></div>
+</div>
+<span class="text-sm font-bold uppercase tracking-wider text-text-muted dark:text-gray-500">September 2023</span>
+</div>
+<!-- Card 3: Therapy -->
+<div class="relative pl-6 group">
+<div class="absolute left-[-5px] top-6 w-3 h-3 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark z-10"></div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-2xl shadow-soft group-hover:shadow-soft-hover transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px] leading-none">physical_therapy</span>
+</span>
+<span class="text-xs font-semibold text-text-muted dark:text-gray-400">Sep 15</span>
+</div>
+<span class="material-symbols-outlined text-gray-300 dark:text-gray-600 text-[20px]">more_horiz</span>
+</div>
+<h3 class="text-lg font-bold text-text-main dark:text-white leading-tight mb-1.5">Knee Rehabilitation Session</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Flexion has improved by 10% since last visit. New exercises added to the home routine.</p>
+<!-- Visual representation of progress or image -->
+<div class="mt-3 relative h-24 w-full rounded-lg overflow-hidden">
+<img alt="Close up of a physical therapy session showing knee exercises" class="absolute inset-0 w-full h-full object-cover opacity-90 hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGPFGc925dMUdwPyhWs8Aa8tVA-zQO8UV41Hb6goXTKbdJnugFjIHGRQfswQW5aDw7CCrziCF6_4fQ-rv9pnPnodba3iJMO0a5P5CJzN68IgxNfwLDKuw53ytE-744VuYObai9jcwerGR9oU4Urj3huwTQa0Zp7LRLTqA_DouaJ0kKWFijpVtStHow9iz-yRLTxG1Bxo7iBo4TyGlQ2rNTmnFpzNkqkIxxoR61gzglslU2xauWUOS2XWTaOZMAdmOsHylvQJfkpw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-3">
+<p class="text-white text-xs font-medium">Session notes attached</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 4: Migraine -->
+<div class="relative pl-6 group">
+<div class="absolute left-[-5px] top-6 w-3 h-3 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-background-light dark:bg-background-dark z-10"></div>
+<div class="bg-card-light dark:bg-card-dark p-5 rounded-2xl shadow-soft group-hover:shadow-soft-hover transition-all duration-300 border border-gray-100 dark:border-white/5">
+<div class="flex justify-between items-start mb-2">
+<div class="flex items-center gap-2">
+<span class="bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-[20px] leading-none">neurology</span>
+</span>
+<span class="text-xs font-semibold text-text-muted dark:text-gray-400">Aug 22</span>
+</div>
+</div>
+<h3 class="text-lg font-bold text-text-main dark:text-white leading-tight mb-1.5">Migraine Follow-up</h3>
+<p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">Reviewing effectiveness of current dosage. Frequency of episodes has decreased.</p>
+</div>
+</div>
+</div>
+<!-- Empty space for scroll -->
+<div class="h-10"></div>
+</main>
+<!-- Floating Action Button -->
+<div class="fixed bottom-24 right-5 z-40 lg:absolute">
+<button class="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary text-text-main shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all duration-300">
+<span class="material-symbols-outlined" style="font-size: 28px;">add</span>
+</button>
+</div>
+<!-- Bottom Navigation -->
+<nav class="fixed bottom-0 w-full max-w-md z-30 bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-200 dark:border-white/5 pb-5 pt-2">
+<div class="flex justify-around items-end px-2">
+<a class="flex flex-col items-center gap-1 w-16 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors text-[24px]">home</span>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary transition-colors">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 w-16" href="#">
+<div class="relative">
+<span class="absolute -inset-1 bg-primary/20 rounded-full blur-sm"></span>
+<span class="relative material-symbols-outlined text-text-main dark:text-primary text-[24px] fill-current">history</span>
+</div>
+<span class="text-[10px] font-bold text-text-main dark:text-white">Timeline</span>
+</a>
+<a class="flex flex-col items-center gap-1 w-16 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors text-[24px]">diversity_1</span>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary transition-colors">Team</span>
+</a>
+<a class="flex flex-col items-center gap-1 w-16 group" href="#">
+<span class="material-symbols-outlined text-gray-400 group-hover:text-primary transition-colors text-[24px]">person</span>
+<span class="text-[10px] font-medium text-gray-400 group-hover:text-primary transition-colors">Profile</span>
+</a>
+</div>
+</nav>
+</div>
+</body></html>

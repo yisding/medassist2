@@ -1,26 +1,115 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Override dark mode to use class instead of media query */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Sage green color palette */
+  --color-primary: #37ec13;
+  --color-primary-dark: #2cc20e;
+  --color-background-light: #f6f8f6;
+  --color-background-dark: #132210;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1c2e18;
+  --color-sage-dark: #101b0d;
+  --color-sage-medium: #599a4c;
+  --color-sage-light: #d3e7cf;
+  --color-sage-bg: #e9f3e7;
+  --color-text-main: #101b0d;
+  --color-text-muted: #599a4c;
+  --color-soft-blue: #4A90E2;
+  --color-soft-blue-light: #EDF5FD;
+
+  /* Fonts */
+  --font-display: "Manrope", sans-serif;
+
+  /* Border radius */
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  --shadow-soft-hover: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root,
+.light {
+  --background: #f6f8f6;
+  --foreground: #101b0d;
+  color-scheme: light;
+}
+
+.dark {
+  --background: #132210;
+  --foreground: #ededed;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Manrope", sans-serif;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide scrollbar but allow scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Material Symbols styling */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Safe area padding for mobile devices */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Skeleton loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e9f3e7 25%,
+    #d3e7cf 50%,
+    #e9f3e7 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(
+    90deg,
+    #1c2e18 25%,
+    #2a4422 50%,
+    #1c2e18 75%
+  );
+  background-size: 200% 100%;
 }
